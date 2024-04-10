@@ -6,8 +6,8 @@ This project aims to benchmark two ASN1 PER (Packed Encoding Rules) codecs in Ru
 
 The project currently includes the following two PER codecs:
 
-1. [rasn, (https://github.com/librasn)] v0.14.0
-2. [asn1-codecs, (https://github.com/ystero-dev/hampi)] v0.6.1
+1. [rasn](https://github.com/librasn) v0.14.0
+2. [asn1-codecs](https://github.com/ystero-dev/hampi) v0.6.1
 
 ## Benchmark Results
 
