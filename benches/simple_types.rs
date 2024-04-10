@@ -3,7 +3,7 @@ use asn1_codecs::{uper::UperCodec, PerCodecData};
 use rasn::uper;
 
 fn rasn_sequence(c: &mut Criterion) {
-    let data: Vec<i32> = vec![42; 100];
+    let data: Vec<u16> = vec![42; 100];
     c.bench_function("RASN/encode - simple sequence", |b| {
         b.iter(|| {
             let _ = uper::encode(&data).unwrap();

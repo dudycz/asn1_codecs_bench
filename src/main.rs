@@ -10,32 +10,36 @@ fn check_sample() {
     println!("hampi_encoded: {:?}", buf.len())
 }
 
-fn check_simple_rasn_type() {
-    let data: Vec<i32> = vec![42; 100];
+// RASN
+fn check_simple_rasn_type(i: u16) {
+    let data: Vec<u16> = vec![i; 100];
     let buf = rasn::uper::encode(&data).unwrap();
     println!("rasn_encoded: {:?}", buf.len());
 }
 
-fn check_simple_hampi_type() {
+
+// HAMPI
+#[derive(asn1_codecs_derive :: UperCodec, Debug)]
+#[asn(type = "INTEGER")]
+pub struct Elem(pub u16);
+
+#[derive(asn1_codecs_derive::UperCodec, Debug)]
+#[asn(type = "SEQUENCE-OF")]
+pub struct BenchSequence(pub Vec<Elem>);
+
+fn check_simple_hampi_type(i: u16) {
     use asn1_codecs::{uper::UperCodec, PerCodecData};
-    #[derive(asn1_codecs_derive :: UperCodec, Debug)]
-    #[asn(type = "INTEGER")]
-    pub struct Elem(pub u16);
-    
-    #[derive(asn1_codecs_derive::UperCodec, Debug)]
-    #[asn(type = "SEQUENCE-OF")]
-    pub struct BenchSequence(pub Vec<Elem>);
 
     let w = BenchSequence{
-        0: (0..100).map(|_| Elem(42)).collect()
+        0: (0..100).map(|_| Elem(i)).collect()
     };
     let mut data = PerCodecData::new_uper();
     w.uper_encode(&mut data).unwrap();
     println!("hampi_encoded: {:?}", data.into_bytes().len());
 }
 
-fn main() {
-    check_sample();
-    check_simple_rasn_type();
-    check_simple_hampi_type();
+fn main() {    
+    check_sample();       
+    check_simple_rasn_type(55);
+    check_simple_hampi_type(55);
 }
