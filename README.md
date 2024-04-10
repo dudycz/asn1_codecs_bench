@@ -11,8 +11,6 @@ The project currently includes the following two PER codecs:
 
 ## Benchmark Results
 
-The following tables present the benchmark results for various test cases:
-
 ### Encoding SEQUENCE-OF 100 integers (u16)
 
 | Codec        | Encoding (µs)  |
@@ -20,7 +18,7 @@ The following tables present the benchmark results for various test cases:
 | rasn         | 39.6           |
 | asn1-codecs  | 7.5            |
 
-### Encoding and decoding nested SEQUENCE-OF containing SEQUENCE type
+### Encoding and decoding nested SEQUENCE-OF (1000 elements)
 For more details regarding ASN1 definition, refer to  [sample.asn](src/sample.asn)
 
 | Codec        | Encoding (µs)  | Decoding (µs)  |
