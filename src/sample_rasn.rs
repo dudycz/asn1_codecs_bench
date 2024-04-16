@@ -1,9 +1,4 @@
-#[allow(
-    non_camel_case_types,
-    non_snake_case,
-    non_upper_case_globals,
-    unused
-)]
+#[allow(non_camel_case_types, non_snake_case, non_upper_case_globals, unused)]
 pub mod world3d {
     extern crate alloc;
     use core::borrow::Borrow;
@@ -11,21 +6,20 @@ pub mod world3d {
     #[derive(AsnType, Debug, Clone, Decode, Encode, PartialEq)]
     #[rasn(automatic_tags)]
     pub struct Color {
-        #[rasn(value("0..=256"))]
+        #[rasn(value("0..=255"))]
         pub r: u8,
-        #[rasn(value("0..=256"))]
+        #[rasn(value("0..=255"))]
         pub g: u8,
-        #[rasn(value("0..=256"))]
+        #[rasn(value("0..=255"))]
         pub b: u8,
         #[rasn(value("0..=65335"))]
-        pub a: u16,        
+        pub a: u16,
     }
     impl Color {
         pub fn new(r: u8, g: u8, b: u8, a: u16) -> Self {
             Self { r, g, b, a }
         }
     }
-
     #[derive(AsnType, Debug, Clone, Decode, Encode, PartialEq)]
     #[rasn(automatic_tags)]
     pub struct Column {
@@ -37,7 +31,6 @@ pub mod world3d {
             Self { elements }
         }
     }
-
     #[derive(AsnType, Debug, Clone, Decode, Encode, PartialEq)]
     #[rasn(automatic_tags)]
     pub struct Plane {
@@ -49,7 +42,6 @@ pub mod world3d {
             Self { rows }
         }
     }
-
     #[derive(AsnType, Debug, Clone, Decode, Encode, PartialEq)]
     #[rasn(automatic_tags)]
     pub struct World {

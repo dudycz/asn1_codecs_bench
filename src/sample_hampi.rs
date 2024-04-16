@@ -26,16 +26,16 @@ pub struct World {
 }
 
 #[derive(asn1_codecs_derive :: UperCodec, Debug)]
-#[asn(type = "INTEGER", lb = "0", ub = "256")]
-pub struct ColorR(pub u16);
+#[asn(type = "INTEGER", lb = "0", ub = "255")]
+pub struct ColorR(pub u8);
 
 #[derive(asn1_codecs_derive :: UperCodec, Debug)]
-#[asn(type = "INTEGER", lb = "0", ub = "256")]
-pub struct ColorG(pub u16);
+#[asn(type = "INTEGER", lb = "0", ub = "255")]
+pub struct ColorG(pub u8);
 
 #[derive(asn1_codecs_derive :: UperCodec, Debug)]
-#[asn(type = "INTEGER", lb = "0", ub = "256")]
-pub struct ColorB(pub u16);
+#[asn(type = "INTEGER", lb = "0", ub = "255")]
+pub struct ColorB(pub u8);
 
 #[derive(asn1_codecs_derive :: UperCodec, Debug)]
 #[asn(type = "INTEGER", lb = "0", ub = "65335")]

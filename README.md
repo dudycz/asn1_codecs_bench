@@ -15,16 +15,16 @@ The project currently includes the following two PER codecs:
 
 | Codec        | Encoding (µs)  |
 |--------------|----------------|
-| rasn         | 39.6           |
-| asn1-codecs  | 7.5            |
+| rasn         | 36.3           |
+| asn1-codecs  | 7.8            |
 
-### Encoding and decoding nested SEQUENCE-OF (1000 elements)
+### Encoding and decoding nested SEQUENCE-OF (1000 elements, 5 bytes each)
 For more details regarding ASN1 definition, refer to  [sample.asn](src/sample.asn)
 
 | Codec        | Encoding (µs)  | Decoding (µs)  |
 |--------------|----------------|----------------|
-| rasn         | 1916.7         | 826.8          |
-| asn1-codecs  | 208            | 145.5          |
+| rasn         | 1794           | 457            |
+| asn1-codecs  | 225            | 125            |
 
 ## Usage
 

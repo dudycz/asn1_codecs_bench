@@ -22,7 +22,7 @@ pub fn encode_rasn(w: &sample_rasn::world3d::World) -> Vec<u8> {
 }
 
 pub fn decode_rasn(encoded: &[u8]) -> sample_rasn::world3d::World {
-    uper::decode::<sample_rasn::world3d::World>(&encoded).unwrap()
+    uper::decode::<sample_rasn::world3d::World>(encoded).unwrap()
 }
 
 pub fn build_sample_hampi() -> sample_hampi::World {
@@ -53,6 +53,6 @@ pub fn encode_hampi(w: &sample_hampi::World) -> Vec<u8> {
 }
 
 pub fn decode_hampi(encoded: &[u8]) -> sample_hampi::World {
-    let mut d = PerCodecData::from_slice_uper(&encoded);
+    let mut d = PerCodecData::from_slice_uper(encoded);
     sample_hampi::World::uper_decode(&mut d).unwrap()
 }

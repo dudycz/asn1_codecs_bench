@@ -20,9 +20,7 @@ pub struct Elem(pub u16);
 pub struct BenchSequence(pub Vec<Elem>);
 
 fn hampi_sequence(c: &mut Criterion) {
-    let w = BenchSequence{
-        0: (0..100).map(|_| Elem(42)).collect()
-    };
+    let w = BenchSequence((0..100).map(|_| Elem(42)).collect());
 
     c.bench_function("HAMPI/encode - simple sequence", |b| {
         b.iter(|| {
