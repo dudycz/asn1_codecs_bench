@@ -1,19 +1,19 @@
 [package]
 name = "asn1_codecs_bench"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 # HAMPI dependencies
-asn1-codecs = "0.6.1"
-asn1_codecs_derive = "0.6.1"
-bitvec = { version = "1.0" }
+asn1-codecs = "0.7.0"
+asn1_codecs_derive = "0.7.0"
+bitvec = "1"
 log = { version = "0.4", features = ["release_max_level_info"] }
 
 # RASN dependencies
-rasn = "0.14.0"
+rasn = "0.15.2"
 
 [dev-dependencies]
 criterion = "0.5.1"

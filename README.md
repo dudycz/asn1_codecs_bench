@@ -6,8 +6,8 @@ This project aims to benchmark two ASN1 PER (Packed Encoding Rules) codecs in Ru
 
 The project currently includes the following two PER codecs:
 
-1. [rasn](https://github.com/librasn) v0.14.0
-2. [asn1-codecs](https://github.com/ystero-dev/hampi) v0.6.1
+1. [rasn](https://github.com/librasn) v0.15.3
+2. [asn1-codecs](https://github.com/ystero-dev/hampi) v0.7.0
 
 ## Benchmark Results
 
@@ -15,16 +15,16 @@ The project currently includes the following two PER codecs:
 
 | Codec        | Encoding (µs)  |
 |--------------|----------------|
-| rasn         | 36.3           |
-| asn1-codecs  | 7.8            |
+| rasn         | 35.2           |
+| asn1-codecs  | 7.5            |
 
 ### Encoding and decoding nested SEQUENCE-OF (1000 elements, 5 bytes each)
 For more details regarding ASN1 definition, refer to  [sample.asn](src/sample.asn)
 
 | Codec        | Encoding (µs)  | Decoding (µs)  |
 |--------------|----------------|----------------|
-| rasn         | 1794           | 457            |
-| asn1-codecs  | 225            | 125            |
+| rasn         | 1716           | 350            |
+| asn1-codecs  | 197            | 122            |
 
 ## Usage
 
