@@ -1,45 +1,71 @@
-use criterion::{criterion_group, criterion_main, Criterion};
 use asn1_codecs_bench::*;
+use criterion::{criterion_group, criterion_main, Criterion};
 
-fn rasn_enc(c: &mut Criterion) {    
-    c.bench_function("RASN/encode - sample.asn", |b| {
-        b.iter(|| {
-            let w = build_sample_rasn();
-            let _ = encode_rasn(&w);
-        })
-    });
+macro_rules! benchmark_encode {
+    ($c:expr, $name:expr, $build_sample:expr, $encode:expr) => {
+        $c.bench_function($name, |b| {
+            b.iter(|| {
+                let w = $build_sample();
+                let _ = $encode(&w);
+            })
+        });
+    };
 }
 
-fn rasn_dec(c: &mut Criterion) {
-    let w = build_sample_rasn();
-    let encoded = encode_rasn(&w);
+macro_rules! benchmark_decode {
+    ($c:expr, $name:expr, $build_sample:expr, $encode:expr, $decode:expr) => {
+        let w = $build_sample();
+        let encoded = $encode(&w);
 
-    c.bench_function("RASN/decode - sample.asn", |b| {
-        b.iter(|| {
-            let _ = decode_rasn(&encoded);
-        })
-    });
+        $c.bench_function($name, |b| {
+            b.iter(|| {
+                let _ = $decode(&encoded);
+            })
+        });
+    };
 }
 
-fn hampi_enc(c: &mut Criterion) {    
-    c.bench_function("HAMPI/encode - sample.asn", |b| {
-        b.iter(|| {
-            let w = build_sample_hampi();
-            let _ = encode_hampi(&w);
-        })
-    });
+fn run_benchmarks(c: &mut Criterion) {
+    benchmark_encode!(
+        c,
+        "asn1rs/encode - sample.asn",
+        build_sample_asn1rs,
+        encode_asn1rs
+    );
+    benchmark_decode!(
+        c,
+        "asn1rs/decode - sample.asn",
+        build_sample_asn1rs,
+        encode_asn1rs,
+        decode_asn1rs
+    );
+    benchmark_encode!(
+        c,
+        "rasn/encode - sample.asn",
+        build_sample_rasn,
+        encode_rasn
+    );
+    benchmark_decode!(
+        c,
+        "rasn/decode - sample.asn",
+        build_sample_rasn,
+        encode_rasn,
+        decode_rasn
+    );
+    benchmark_encode!(
+        c,
+        "asn1-codecs/encode - sample.asn",
+        build_sample_hampi,
+        encode_hampi
+    );
+    benchmark_decode!(
+        c,
+        "asn1-codecs/decode - sample.asn",
+        build_sample_hampi,
+        encode_hampi,
+        decode_hampi
+    );
 }
 
-fn hampi_dec(c: &mut Criterion) {
-    let w = build_sample_hampi();
-    let encoded = encode_hampi(&w);
-
-    c.bench_function("HAMPI/decode - sample.asn", |b| {
-        b.iter(|| {
-            let _ = decode_hampi(&encoded);
-        })
-    });
-}
-
-criterion_group!(benches, rasn_enc, rasn_dec, hampi_enc, hampi_dec);
+criterion_group!(benches, run_benchmarks);
 criterion_main!(benches);

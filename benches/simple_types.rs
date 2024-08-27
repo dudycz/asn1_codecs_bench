@@ -1,5 +1,5 @@
-use criterion::{criterion_group, criterion_main, Criterion};
 use asn1_codecs::{uper::UperCodec, PerCodecData};
+use criterion::{criterion_group, criterion_main, Criterion};
 use rasn::uper;
 
 fn rasn_sequence(c: &mut Criterion) {

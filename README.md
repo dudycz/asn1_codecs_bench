@@ -23,8 +23,9 @@ For more details regarding ASN1 definition, refer to  [sample.asn](src/sample.as
 
 | Codec        | Encoding (µs)  | Decoding (µs)  |
 |--------------|----------------|----------------|
-| rasn         | 1716           | 350            |
-| asn1-codecs  | 197            | 122            |
+| rasn         | 1759           | 259            |
+| asn1-codecs  | 187            | 122            |
+| asn1rs       | 72             | 65             |
 
 ## Usage
 

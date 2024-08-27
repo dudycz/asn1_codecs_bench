@@ -9,11 +9,12 @@ edition = "2021"
 # HAMPI dependencies
 asn1-codecs = "0.7.0"
 asn1_codecs_derive = "0.7.0"
+asn1rs = "0.3.1"
 bitvec = "1"
 log = { version = "0.4", features = ["release_max_level_info"] }
 
 # RASN dependencies
-rasn = "0.15.2"
+rasn = "0.16.5"
 
 [dev-dependencies]
 criterion = "0.5.1"

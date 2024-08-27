@@ -8,7 +8,7 @@ fn check_sample_rasn() {
 
 fn check_sample_hampi() {
     let w = build_sample_hampi();
-    let buf = encode_hampi(&w);  
+    let buf = encode_hampi(&w);
     println!("hampi_encoded: {:?}", buf.len())
 }
 
@@ -17,7 +17,6 @@ fn check_simple_rasn(i: u16) {
     let buf = rasn::uper::encode(&data).unwrap();
     println!("rasn_encoded: {:?}", buf.len());
 }
-
 
 // HAMPI
 #[derive(asn1_codecs_derive :: UperCodec, Debug)]
@@ -39,7 +38,7 @@ fn check_simple_hampi(i: u16) {
 
 fn main() {
     for i in 0..256 {
-        check_sample_rasn();       
+        check_sample_rasn();
         check_sample_hampi();
         check_simple_rasn(i);
         check_simple_hampi(i);
