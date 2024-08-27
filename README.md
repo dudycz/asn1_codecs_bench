@@ -1,22 +1,16 @@
 # Rust ASN.1 Codecs Benchmark
 
-This project aims to benchmark two ASN1 PER (Packed Encoding Rules) codecs in Rust.
+This project aims to benchmark existing ASN1 PER (Packed Encoding Rules) codecs in Rust.
 
 ## Codecs used in comparision
 
-The project currently includes the following two PER codecs:
+The project currently includes the following UPER codecs:
 
-1. [rasn](https://github.com/librasn) v0.15.3
+1. [rasn](https://github.com/librasn) v0.16.5
 2. [asn1-codecs](https://github.com/ystero-dev/hampi) v0.7.0
+3. [asn1rs](https://github.com/kellerkindt/asn1rs) v0.3.1
 
 ## Benchmark Results
-
-### Encoding SEQUENCE-OF 100 integers (u16)
-
-| Codec        | Encoding (µs)  |
-|--------------|----------------|
-| rasn         | 35.2           |
-| asn1-codecs  | 7.5            |
 
 ### Encoding and decoding nested SEQUENCE-OF (1000 elements, 5 bytes each)
 For more details regarding ASN1 definition, refer to  [sample.asn](src/sample.asn)
@@ -26,6 +20,13 @@ For more details regarding ASN1 definition, refer to  [sample.asn](src/sample.as
 | rasn         | 1759           | 259            |
 | asn1-codecs  | 187            | 122            |
 | asn1rs       | 72             | 65             |
+
+### Encoding SEQUENCE-OF 100 integers (u16)
+
+| Codec        | Encoding (µs)  |
+|--------------|----------------|
+| rasn         | 35.2           |
+| asn1-codecs  | 7.5            |
 
 ## Usage
 
