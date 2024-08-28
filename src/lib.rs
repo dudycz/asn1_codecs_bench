@@ -73,29 +73,23 @@ pub fn decode_hampi(encoded: &[u8]) -> sample_hampi::World {
 pub fn build_sample_asn1rs() -> sample_asn1rs::World {
     use crate::sample_asn1rs::*;
 
+    let color = Color {
+        r: 42,
+        g: 128,
+        b: 77,
+        a: 12312,
+    };
+
+    let column = Column {
+        elements: vec![color; 10],
+    };
+
+    let plane = Plane {
+        rows: vec![column; 10],
+    };
+
     World {
-        depth: (0..10)
-            .map(|_| {
-                let plane = Plane {
-                    rows: (0..10)
-                        .map(|_| {
-                            let column = Column {
-                                elements: (0..10)
-                                    .map(|_| Color {
-                                        r: 42,
-                                        g: 128,
-                                        b: 77,
-                                        a: 12312,
-                                    })
-                                    .collect(),
-                            };
-                            column
-                        })
-                        .collect(),
-                };
-                plane
-            })
-            .collect(),
+        depth: vec![plane; 10],
     }
 }
 
@@ -125,6 +119,7 @@ mod tests {
         let dec_asn1rs = decode_asn1rs(&encoded);
         let enc_asn1rs = encode_asn1rs(&dec_asn1rs);
 
+        println!("encoded: {:?}", encoded);
         // Compare encoded with enc_hampi and enc_asn1rs
         assert_eq!(encoded, enc_hampi);
         assert_eq!(encoded, enc_asn1rs);

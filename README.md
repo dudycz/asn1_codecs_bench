@@ -17,16 +17,17 @@ For more details regarding ASN1 definition, refer to  [sample.asn](src/sample.as
 
 | Codec        | Encoding (µs)  | Decoding (µs)  |
 |--------------|----------------|----------------|
-| rasn         | 1759           | 259            |
-| asn1-codecs  | 187            | 122            |
-| asn1rs       | 72             | 65             |
+| rasn         | 1658           | 199            |
+| asn1-codecs  | 132            | 49             |
+| asn1rs       | 70             | 68             |
 
-### Encoding SEQUENCE-OF 100 integers (u16)
+### Encoding flat SEQUENCE-OF 1000 integers (u64)
 
 | Codec        | Encoding (µs)  |
 |--------------|----------------|
-| rasn         | 35.2           |
-| asn1-codecs  | 7.5            |
+| rasn         | 505            |
+| asn1-codecs  | 53             |
+| asn1rs       | 35             |
 
 ## Usage
 

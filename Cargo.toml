@@ -27,6 +27,6 @@ harness = false
 name = "simple_types"
 harness = false
 
-[profile.release-with-debug]
-inherits = "release"
-debug = true
+[profile.release]
+lto = true # Enable Link-Time Optimization
+codegen-units = 1 # Enable single codegen unit for better optimization
