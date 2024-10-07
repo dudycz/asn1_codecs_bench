@@ -6,18 +6,18 @@ This project aims to benchmark existing ASN1 PER (Packed Encoding Rules) codecs 
 
 The project currently includes the following UPER codecs:
 
-1. [rasn](https://github.com/librasn) v0.16.5
+1. [rasn](https://github.com/librasn) v0.20.1
 2. [asn1-codecs](https://github.com/ystero-dev/hampi) v0.7.0
 3. [asn1rs](https://github.com/kellerkindt/asn1rs) v0.3.1
 
 ## Benchmark Results
-
+System configuration: Ubuntu 24.04, Rustc: 1.81, AMD Ryzen 5850U 32GB RAM.
 ### Encoding and decoding nested SEQUENCE-OF (1000 elements, 5 bytes each)
 For more details regarding ASN1 definition, refer to  [sample.asn](src/sample.asn)
 
 | Codec        | Encoding (µs)  | Decoding (µs)  |
 |--------------|----------------|----------------|
-| rasn         | 1658           | 199            |
+| rasn         | 1387           | 165            |
 | asn1-codecs  | 132            | 49             |
 | asn1rs       | 70             | 68             |
 
@@ -25,7 +25,7 @@ For more details regarding ASN1 definition, refer to  [sample.asn](src/sample.as
 
 | Codec        | Encoding (µs)  |
 |--------------|----------------|
-| rasn         | 505            |
+| rasn         | 448            |
 | asn1-codecs  | 53             |
 | asn1rs       | 35             |
 

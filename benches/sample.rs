@@ -4,8 +4,8 @@ use criterion::{criterion_group, criterion_main, Criterion};
 macro_rules! benchmark_encode {
     ($c:expr, $name:expr, $build_sample:expr, $encode:expr) => {
         $c.bench_function($name, |b| {
+            let w = $build_sample();
             b.iter(|| {
-                let w = $build_sample();
                 let _ = $encode(&w);
             })
         });
