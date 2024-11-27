@@ -11,7 +11,7 @@ The project currently includes the following UPER codecs:
 3. [asn1rs](https://github.com/kellerkindt/asn1rs) v0.3.1
 
 ## Benchmark Results
-System configuration: Ubuntu 24.04, Rustc: 1.81, AMD Ryzen 5850U 32GB RAM.
+System configuration: Ubuntu 24.04, Rustc: 1.82, AMD Ryzen 5850U 32GB RAM.
 ### Encoding and decoding nested SEQUENCE-OF (1000 elements, 5 bytes each)
 For more details regarding ASN1 definition, refer to  [sample.asn](src/sample.asn)
 
