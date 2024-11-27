@@ -10,13 +10,13 @@ asn1rs = "0.3.1"
 bitvec = "1"
 log = { version = "0.4", features = ["release_max_level_info"] }
 lazy_static = "1.4"
-rasn = "0.20.1"
+rasn = "0.22.0"
 
 [dev-dependencies]
 criterion = "0.5.1"
 
 [build-dependencies]
-rasn-compiler = "0.5.0"
+rasn-compiler = "0.6.1"
 asn1-compiler = "0.7.0"
 asn1rs = "0.3.1"
 
