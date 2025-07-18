@@ -22,7 +22,7 @@ pub struct Elem(pub u64);
 pub struct BenchSequence(pub Vec<Elem>);
 
 fn hampi_sequence(c: &mut Criterion) {
-    let w = BenchSequence((0..1000).map(|_| Elem(1)).collect());
+    let w = BenchSequence((0..1000).map(|_| Elem(42)).collect());
 
     c.bench_function("asn1-codecs/encode - simple sequence", |b| {
         b.iter(|| {
@@ -35,7 +35,7 @@ fn hampi_sequence(c: &mut Criterion) {
 fn asn1rs_sequence(c: &mut Criterion) {
     use asn1rs::prelude::*;
     use simple_asn1rs::{SequenceOfBasicInteger, SimpleInteger};
-    let data = SequenceOfBasicInteger((0..1000).map(|_| SimpleInteger(1)).collect());
+    let data = SequenceOfBasicInteger((0..1000).map(|_| SimpleInteger(42)).collect());
     let mut writer = UperWriter::default();
     c.bench_function("asn1rs/encode - simple sequence", |b| {
         b.iter(|| {
