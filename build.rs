@@ -6,10 +6,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // RASN code generation
     use rasn_compiler::prelude::*;
+    use rasn_compiler::OutputMode;
     let out_dir = env::var("OUT_DIR")?;
     Compiler::<RasnBackend, _>::new()
         .add_asn_sources_by_path([asn_path].iter())
-        .set_output_path(PathBuf::from(&out_dir).join("sample_rasn.rs"))
+        .set_output_mode(OutputMode::SingleFile(PathBuf::from(&out_dir).join("sample_rasn.rs")))
         .compile()
         .expect("Error during compilation");
 
@@ -31,7 +32,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // asn1rs code generation
     use asn1rs::converter::Converter;
-    use asn1rs::gen::rust::RustCodeGenerator;
+    use asn1rs::r#gen::rust::RustCodeGenerator;
     let mut converter = Converter::default();
 
     if let Err(e) = converter.load_file(asn_path) {
