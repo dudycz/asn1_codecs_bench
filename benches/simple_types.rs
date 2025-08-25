@@ -1,6 +1,6 @@
 mod simple_asn1rs;
-use asn1_codecs::{uper::UperCodec, PerCodecData};
-use criterion::{criterion_group, criterion_main, Criterion};
+use asn1_codecs::{PerCodecData, uper::UperCodec};
+use criterion::{Criterion, criterion_group, criterion_main};
 use rasn::uper;
 
 fn rasn_sequence(c: &mut Criterion) {

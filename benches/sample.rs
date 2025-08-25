@@ -1,5 +1,5 @@
 use asn1_codecs_bench::*;
-use criterion::{criterion_group, criterion_main, Criterion};
+use criterion::{Criterion, criterion_group, criterion_main};
 
 macro_rules! benchmark_encode {
     ($c:expr, $name:expr, $build_sample:expr, $encode:expr) => {

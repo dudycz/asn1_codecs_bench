@@ -28,7 +28,7 @@ pub struct Elem(pub u16);
 pub struct BenchSequence(pub Vec<Elem>);
 
 fn check_simple_hampi(i: u16) {
-    use asn1_codecs::{uper::UperCodec, PerCodecData};
+    use asn1_codecs::{PerCodecData, uper::UperCodec};
 
     let w = BenchSequence((0..100).map(|_| Elem(i)).collect());
     let mut data = PerCodecData::new_uper();

@@ -4,7 +4,7 @@ pub mod sample_hampi {
     include!(concat!(env!("OUT_DIR"), "/sample_hampi.rs"));
 }
 
-use asn1_codecs::{uper::UperCodec, PerCodecData}; // HAMPI codec
+use asn1_codecs::{PerCodecData, uper::UperCodec}; // HAMPI codec
 
 pub fn build_sample_hampi() -> sample_hampi::World {
     use crate::hampi_helpers::sample_hampi::*;

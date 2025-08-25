@@ -5,19 +5,21 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let asn_path = "./asn/sample.asn";
 
     // RASN code generation
-    use rasn_compiler::prelude::*;
     use rasn_compiler::OutputMode;
+    use rasn_compiler::prelude::*;
     let out_dir = env::var("OUT_DIR")?;
     Compiler::<RasnBackend, _>::new()
         .add_asn_sources_by_path([asn_path].iter())
-        .set_output_mode(OutputMode::SingleFile(PathBuf::from(&out_dir).join("sample_rasn.rs")))
+        .set_output_mode(OutputMode::SingleFile(
+            PathBuf::from(&out_dir).join("sample_rasn.rs"),
+        ))
         .compile()
         .expect("Error during compilation");
 
     // asn1-codecs code generation
     use asn1_compiler::{
-        generator::{Codec, Derive, Visibility},
         Asn1Compiler,
+        generator::{Codec, Derive, Visibility},
     };
     let rs_module_path = PathBuf::from(&out_dir).join("sample_hampi.rs");
     let mut compiler = Asn1Compiler::new(
