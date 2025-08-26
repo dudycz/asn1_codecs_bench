@@ -4,8 +4,8 @@ version = "0.2.1"
 edition = "2024"
 
 [dependencies]
-asn1-codecs = "0.7.1"
-asn1_codecs_derive = "0.7.1"
+asn1-codecs = "0.7.2"
+asn1_codecs_derive = "0.7.2"
 asn1rs = "0.3.1"
 bitvec = "1"
 log = { version = "0.4", features = ["release_max_level_info"] }
@@ -17,7 +17,7 @@ criterion = "0.6"
 
 [build-dependencies]
 rasn-compiler = "0.14.2"
-asn1-compiler = "0.7.1"
+asn1-compiler = "0.7.2"
 asn1rs = "0.3.1"
 
 [[bench]]
