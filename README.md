@@ -14,9 +14,9 @@ The project currently includes the following UPER codecs:
 
 System configuration: Ubuntu 24.04, Rustc: 1.89.0, AMD Ryzen 5850U 32GB RAM.
 
-### Encoding and decoding nested SEQUENCE-OF (1000 elements, 5 bytes each)
+### Encoding and decoding nested SEQUENCE-OF 1000 structs (5 bytes each)
 
-For more details regarding ASN1 definition, refer to  [sample.asn](src/sample.asn)
+For more details regarding ASN1 definition, refer to  [sample.asn](asn/sample.asn)
 
 | Codec        | Encoding (µs)  | Decoding (µs)  |
 |--------------|----------------|----------------|
