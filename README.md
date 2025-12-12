@@ -12,25 +12,44 @@ The project currently includes the following UPER codecs:
 
 ## Benchmark Results
 
-System configuration: Ubuntu 24.04, Rustc: 1.81.0, AMD Ryzen 5850U 32GB RAM.
+System configuration: Ubuntu 24.04, Rustc: 1.92.0, AMD Ryzen 5850U 32GB RAM.
 
-### Encoding and decoding nested SEQUENCE-OF 1000 structs (5 bytes each)
+### Encoding and decoding sample telecom protocol message
 
-For more details regarding ASN1 definition, refer to  [sample.asn](asn/sample.asn)
+For more details regarding ASN1 definition, refer to [telco_sample.asn](asn/telco_sample.asn)
+
+This benchmark uses a generic telecom-inspired protocol with realistic features (~377 bytes encoded):
+- CHOICE types (PDU with Request variant)
+- ENUMERATED types (PriorityLevel, RecordType)
+- OPTIONAL fields (timestamps, addresses, metadata)
+- Variable-length SEQUENCE-OF (20 records)
+- OCTET STRING fields (identifiers, payloads)
+- Nested structures with BOOLEAN and INTEGER fields
 
 | Codec        | Encoding (µs) | Decoding (µs) |
 |--------------|--------------:|--------------:|
-| rasn         | 971           | 107           |
-| asn1-codecs  | 179           | 50            |
-| asn1rs       | 70            | 72            |
+| rasn         | 40.7          | 7.4           |
+| asn1-codecs  | 6.0           | 5.1           |
+| asn1rs       | 2.6           | 3.1           |
+
+### Encoding and decoding 3D array (10×10×10 Color structs, 5 bytes each)
+
+For more details regarding ASN1 definition, refer to [sample.asn](asn/sample.asn)
+
+| Codec        | Encoding (µs) | Decoding (µs) |
+|--------------|--------------:|--------------:|
+| rasn         | 1,113         | 112           |
+| asn1-codecs  | 168           | 55            |
+| asn1rs       | 74            | 79            |
+
 
 ### Encoding flat SEQUENCE-OF 1000 integers (u64)
 
 | Codec        | Encoding (µs) |
 |--------------|--------------:|
-| rasn         | 463           |
-| asn1-codecs  | 82            |
-| asn1rs       | 38            |
+| rasn         | 479           |
+| asn1-codecs  | 58            |
+| asn1rs       | 40            |
 
 ## Usage
 

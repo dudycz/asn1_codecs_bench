@@ -1,0 +1,54 @@
+-- Generic Telecom Protocol - Realistic ASN.1 Schema
+-- Features: CHOICE, OPTIONAL, ENUMERATED, variable-length sequences, strings
+
+TelecomProtocol DEFINITIONS AUTOMATIC TAGS ::= BEGIN
+
+-- Protocol Data Unit wrapper with CHOICE of message types
+PDU ::= CHOICE {
+    request Request
+}
+
+-- Request message with optional fields and variable-length data
+Request ::= SEQUENCE {
+    requestId OCTET STRING (SIZE(1..32)),
+    priority PriorityLevel,
+    timestamp INTEGER (0..4294967295) OPTIONAL,
+    sourceAddress OCTET STRING (SIZE(1..64)) OPTIONAL,
+    destinationAddress OCTET STRING (SIZE(1..64)),
+    payload OCTET STRING (SIZE(0..1024)),
+    records SEQUENCE (SIZE(1..20)) OF Record
+}
+
+-- Record with nested structure and mixed mandatory/optional fields
+Record ::= SEQUENCE {
+    recordId INTEGER (0..65535),
+    recordType RecordType,
+    value INTEGER (0..4294967295),
+    attributes Attributes OPTIONAL,
+    metadata OCTET STRING (SIZE(0..64)) OPTIONAL
+}
+
+-- Attributes with all mandatory fields
+Attributes ::= SEQUENCE {
+    flag1 BOOLEAN,
+    flag2 BOOLEAN,
+    counter INTEGER (0..255),
+    qualifier INTEGER (0..1023)
+}
+
+-- Enumerated types
+PriorityLevel ::= ENUMERATED {
+    low(0),
+    normal(1),
+    high(2),
+    critical(3)
+}
+
+RecordType ::= ENUMERATED {
+    data(0),
+    control(1),
+    status(2),
+    config(3)
+}
+
+END

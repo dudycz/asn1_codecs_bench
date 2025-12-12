@@ -13,7 +13,7 @@ lazy_static = "1.4"
 rasn = "0.28"
 
 [dev-dependencies]
-criterion = "0.7"
+criterion = "0.8"
 
 [build-dependencies]
 rasn-compiler = "0.14.3"
@@ -26,6 +26,10 @@ harness = false
 
 [[bench]]
 name = "simple_types"
+harness = false
+
+[[bench]]
+name = "telco_sample"
 harness = false
 
 [profile.release]
