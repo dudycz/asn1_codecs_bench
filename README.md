@@ -28,9 +28,9 @@ This benchmark uses a generic telecom-inspired protocol with realistic features 
 
 | Codec        | Encoding (µs) | Decoding (µs) |
 |--------------|--------------:|--------------:|
-| rasn         | 40.7          | 7.4           |
-| asn1-codecs  | 6.0           | 5.1           |
-| asn1rs       | 2.6           | 3.1           |
+| rasn         | 37.1          | 6.6           |
+| asn1-codecs  | 5.7           | 4.9           |
+| asn1rs       | 2.5           | 2.9           |
 
 ### Encoding and decoding 3D array (10×10×10 Color structs, 5 bytes each)
 
@@ -38,18 +38,18 @@ For more details regarding ASN1 definition, refer to [sample.asn](asn/sample.asn
 
 | Codec        | Encoding (µs) | Decoding (µs) |
 |--------------|--------------:|--------------:|
-| rasn         | 1,113         | 112           |
-| asn1-codecs  | 168           | 55            |
-| asn1rs       | 74            | 79            |
+| rasn         | 958           | 103           |
+| asn1-codecs  | 180           | 49            |
+| asn1rs       | 69            | 74            |
 
 
 ### Encoding flat SEQUENCE-OF 1000 integers (u64)
 
 | Codec        | Encoding (µs) |
 |--------------|--------------:|
-| rasn         | 479           |
-| asn1-codecs  | 58            |
-| asn1rs       | 40            |
+| rasn         | 459           |
+| asn1-codecs  | 52            |
+| asn1rs       | 37            |
 
 ## Usage
 
