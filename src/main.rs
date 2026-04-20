@@ -12,15 +12,6 @@ fn check_sample_hampi() {
     println!("hampi_encoded: {:?}", buf.len())
 }
 
-// HAMPI
-#[derive(asn1_codecs_derive :: UperCodec, Debug)]
-#[asn(type = "INTEGER")]
-pub struct Elem(pub u16);
-
-#[derive(asn1_codecs_derive::UperCodec, Debug)]
-#[asn(type = "SEQUENCE-OF")]
-pub struct BenchSequence(pub Vec<Elem>);
-
 fn main() {
     // Check telco sample message sizes
     println!("=== Telco Sample Message Sizes ===");

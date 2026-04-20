@@ -12,7 +12,7 @@ The project currently includes the following UPER codecs:
 
 ## Benchmark Results
 
-System configuration: Ubuntu 24.04, Rustc: 1.92.0, AMD Ryzen 5850U 32GB RAM.
+System configuration: Ubuntu 24.04, Rustc: 1.95.0, AMD Ryzen 5850U 32GB RAM.
 
 ### Encoding and decoding sample telecom protocol message
 
@@ -28,9 +28,9 @@ This benchmark uses a generic telecom-inspired protocol with realistic features 
 
 | Codec        | Encoding (µs) | Decoding (µs) |
 |--------------|--------------:|--------------:|
-| rasn         | 37.1          | 6.6           |
-| asn1-codecs  | 5.7           | 4.9           |
-| asn1rs       | 2.5           | 2.9           |
+| rasn         | 38.3          | 6.5           |
+| asn1-codecs  | 5.4           | 5.4           |
+| asn1rs       | 2.5           | 2.8           |
 
 ### Encoding and decoding 3D array (10×10×10 Color structs, 5 bytes each)
 
@@ -38,18 +38,18 @@ For more details regarding ASN1 definition, refer to [sample.asn](asn/sample.asn
 
 | Codec        | Encoding (µs) | Decoding (µs) |
 |--------------|--------------:|--------------:|
-| rasn         | 958           | 103           |
-| asn1-codecs  | 180           | 49            |
-| asn1rs       | 69            | 74            |
+| rasn         | 1001.0        | 109.7         |
+| asn1-codecs  | 156.5         | 49.0          |
+| asn1rs       | 69.2          | 74.2          |
 
 
 ### Encoding flat SEQUENCE-OF 1000 integers (u64)
 
 | Codec        | Encoding (µs) |
 |--------------|--------------:|
-| rasn         | 459           |
-| asn1-codecs  | 52            |
-| asn1rs       | 37            |
+| rasn         | 442.3         |
+| asn1-codecs  | 49.9          |
+| asn1rs       | 37.9          |
 
 ## Usage
 

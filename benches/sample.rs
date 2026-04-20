@@ -1,13 +1,12 @@
 use asn1_codecs_bench::*;
 use criterion::{Criterion, criterion_group, criterion_main};
+use std::hint::black_box;
 
 macro_rules! benchmark_encode {
     ($c:expr, $name:expr, $build_sample:expr, $encode:expr) => {
         $c.bench_function($name, |b| {
             let w = $build_sample();
-            b.iter(|| {
-                let _ = $encode(&w);
-            })
+            b.iter(|| $encode(black_box(&w)))
         });
     };
 }
@@ -17,11 +16,7 @@ macro_rules! benchmark_decode {
         let w = $build_sample();
         let encoded = $encode(&w);
 
-        $c.bench_function($name, |b| {
-            b.iter(|| {
-                let _ = $decode(&encoded);
-            })
-        });
+        $c.bench_function($name, |b| b.iter(|| $decode(black_box(&encoded))));
     };
 }
 

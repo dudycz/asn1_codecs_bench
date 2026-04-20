@@ -2,13 +2,12 @@ mod simple_asn1rs;
 use asn1_codecs::{PerCodecData, uper::UperCodec};
 use criterion::{Criterion, criterion_group, criterion_main};
 use rasn::uper;
+use std::hint::black_box;
 
 fn rasn_sequence(c: &mut Criterion) {
     let data: Vec<u64> = vec![42; 1000];
     c.bench_function("rasn/encode - simple sequence", |b| {
-        b.iter(|| {
-            let _ = uper::encode(&data).unwrap();
-        })
+        b.iter(|| uper::encode(black_box(&data)).unwrap())
     });
 }
 
@@ -27,7 +26,8 @@ fn hampi_sequence(c: &mut Criterion) {
     c.bench_function("asn1-codecs/encode - simple sequence", |b| {
         b.iter(|| {
             let mut data = PerCodecData::new_uper();
-            w.uper_encode(&mut data).unwrap();
+            black_box(&w).uper_encode(&mut data).unwrap();
+            data.into_bytes()
         })
     });
 }
@@ -36,10 +36,11 @@ fn asn1rs_sequence(c: &mut Criterion) {
     use asn1rs::prelude::*;
     use simple_asn1rs::{SequenceOfBasicInteger, SimpleInteger};
     let data = SequenceOfBasicInteger((0..1000).map(|_| SimpleInteger(42)).collect());
-    let mut writer = UperWriter::default();
     c.bench_function("asn1rs/encode - simple sequence", |b| {
         b.iter(|| {
-            writer.write(&data).unwrap();
+            let mut writer = UperWriter::default();
+            writer.write(black_box(&data)).unwrap();
+            writer.into_bytes_vec()
         })
     });
 }

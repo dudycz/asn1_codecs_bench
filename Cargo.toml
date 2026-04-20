@@ -9,8 +9,7 @@ asn1_codecs_derive = "0.7.2"
 asn1rs = "0.3.1"
 bitvec = "1"
 log = { version = "0.4", features = ["release_max_level_info"] }
-lazy_static = "1.4"
-rasn = "0.28.4"
+rasn = "0.28.12"
 
 [dev-dependencies]
 criterion = "0.8"

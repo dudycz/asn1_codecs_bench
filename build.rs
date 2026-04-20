@@ -1,41 +1,24 @@
 use std::env;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let asn_path = "./asn/sample.asn";
-    let telco_sample_asn_path = "./asn/telco_sample.asn";
-
-    // RASN code generation
+fn generate_rasn(asn_path: &str, out_dir: &Path, out_name: &str) {
     use rasn_compiler::OutputMode;
     use rasn_compiler::prelude::*;
-    let out_dir = env::var("OUT_DIR")?;
 
-    // Generate code for sample.asn
     Compiler::<RasnBackend, _>::new()
         .add_asn_sources_by_path([asn_path].iter())
-        .set_output_mode(OutputMode::SingleFile(
-            PathBuf::from(&out_dir).join("sample_rasn.rs"),
-        ))
+        .set_output_mode(OutputMode::SingleFile(out_dir.join(out_name)))
         .compile()
-        .expect("Error during compilation");
+        .unwrap_or_else(|_| panic!("rasn compilation failed for {asn_path}"));
+}
 
-    // Generate code for telco_sample.asn
-    Compiler::<RasnBackend, _>::new()
-        .add_asn_sources_by_path([telco_sample_asn_path].iter())
-        .set_output_mode(OutputMode::SingleFile(
-            PathBuf::from(&out_dir).join("telco_sample_rasn.rs"),
-        ))
-        .compile()
-        .expect("Error during compilation of telco_sample.asn");
-
-    // asn1-codecs code generation
+fn generate_hampi(asn_path: &str, out_dir: &Path, out_name: &str) {
     use asn1_compiler::{
         Asn1Compiler,
         generator::{Codec, Derive, Visibility},
     };
 
-    // Generate code for sample.asn
-    let rs_module_path = PathBuf::from(&out_dir).join("sample_hampi.rs");
+    let rs_module_path = out_dir.join(out_name);
     let mut compiler = Asn1Compiler::new(
         rs_module_path
             .to_str()
@@ -44,46 +27,43 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         vec![Codec::Uper],
         vec![Derive::Debug],
     );
-    compiler.compile_files(&[asn_path])?;
+    compiler
+        .compile_files(&[asn_path])
+        .unwrap_or_else(|e| panic!("asn1-codecs compilation failed for {asn_path}: {e:?}"));
+}
 
-    // Generate code for telco_sample.asn
-    let telco_sample_rs_module_path = PathBuf::from(&out_dir).join("telco_sample_hampi.rs");
-    let mut telco_sample_compiler = Asn1Compiler::new(
-        telco_sample_rs_module_path
-            .to_str()
-            .expect("Failed to convert path to string"),
-        &Visibility::Public,
-        vec![Codec::Uper],
-        vec![Derive::Debug],
-    );
-    telco_sample_compiler.compile_files(&[telco_sample_asn_path])?;
-
-    // asn1rs code generation
+fn generate_asn1rs(asn_path: &str, out_dir: &str) {
     use asn1rs::converter::Converter;
     use asn1rs::r#gen::rust::RustCodeGenerator;
 
-    // Generate code for sample.asn
     let mut converter = Converter::default();
-
     if let Err(e) = converter.load_file(asn_path) {
-        panic!("Loading of .asn1 file failed {:?}", e);
+        panic!("Loading of {asn_path} failed {:?}", e);
+    }
+    if let Err(e) = converter.to_rust(out_dir, |_generator: &mut RustCodeGenerator| {}) {
+        panic!("Conversion of {asn_path} to rust failed: {:?}", e);
+    }
+}
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let asn_files = ["./asn/sample.asn", "./asn/telco_sample.asn"];
+
+    println!("cargo:rerun-if-changed=build.rs");
+    for f in &asn_files {
+        println!("cargo:rerun-if-changed={f}");
     }
 
-    if let Err(e) = converter.to_rust(&out_dir, |_generator: &mut RustCodeGenerator| {}) {
-        panic!("Conversion to rust failed: {:?}", e);
-    }
+    let out_dir = env::var("OUT_DIR")?;
+    let out_dir_path = PathBuf::from(&out_dir);
 
-    // Generate code for telco_sample.asn
-    let mut telco_sample_converter = Converter::default();
+    generate_rasn(asn_files[0], &out_dir_path, "sample_rasn.rs");
+    generate_rasn(asn_files[1], &out_dir_path, "telco_sample_rasn.rs");
 
-    if let Err(e) = telco_sample_converter.load_file(telco_sample_asn_path) {
-        panic!("Loading of telco_sample.asn file failed {:?}", e);
-    }
+    generate_hampi(asn_files[0], &out_dir_path, "sample_hampi.rs");
+    generate_hampi(asn_files[1], &out_dir_path, "telco_sample_hampi.rs");
 
-    if let Err(e) =
-        telco_sample_converter.to_rust(&out_dir, |_generator: &mut RustCodeGenerator| {})
-    {
-        panic!("Conversion of telco_sample.asn to rust failed: {:?}", e);
+    for f in &asn_files {
+        generate_asn1rs(f, &out_dir);
     }
 
     Ok(())

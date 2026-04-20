@@ -4,7 +4,7 @@ Color ::= SEQUENCE {
     r INTEGER (0..255),
     g INTEGER (0..255),
     b INTEGER (0..255),
-    a INTEGER (0..65335)
+    a INTEGER (0..65535)
 }
 
 Column ::= SEQUENCE {
