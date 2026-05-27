@@ -1,5 +1,9 @@
 # Rust ASN.1 Codecs Benchmark
 
+[![CI](https://github.com/dudycz/asn1_codecs_bench/actions/workflows/rust.yml/badge.svg)](https://github.com/dudycz/asn1_codecs_bench/actions/workflows/rust.yml)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![Rust Edition: 2024](https://img.shields.io/badge/Rust%20Edition-2024-orange.svg)](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)
+
 This project aims to benchmark existing ASN1 PER (Packed Encoding Rules) codecs in Rust.
 
 ## Codecs used in comparision

@@ -1,21 +1,21 @@
 [package]
 name = "asn1_codecs_bench"
-version = "0.2.3"
+version = "0.2.4"
 edition = "2024"
 
 [dependencies]
 asn1-codecs = "0.7.2"
 asn1_codecs_derive = "0.7.2"
 asn1rs = "0.3.1"
-bitvec = "1"
-log = { version = "0.4", features = ["release_max_level_info"] }
-rasn = "0.28.12"
+bitvec = "1.0.1"
+log = { version = "0.4.30", features = ["release_max_level_info"] }
+rasn = "0.28.13"
 
 [dev-dependencies]
-criterion = "0.8"
+criterion = "0.8.2"
 
 [build-dependencies]
-rasn-compiler = "0.16"
+rasn-compiler = "0.16.0"
 asn1-compiler = "0.7.2"
 asn1rs = "0.3.1"
 
